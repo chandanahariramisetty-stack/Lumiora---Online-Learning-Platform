@@ -68,7 +68,4 @@
 - Python 3.10 or higher
 - pip (Python package manager)
 
-### Step 1: Clone the repository
-```bash
-git clone https://github.com/yourusername/lumiora.git
-cd lumiora
+
