@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - Lumiora{% endblock %}
+
+{% block content %}
+<section style="padding-top: 100px; background: linear-gradient(180deg, var(--lumiora-deep), var(--lumiora-dark)); min-height: 100vh;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h1 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 1rem;">Contact Us</h1>
+            <p style="color: var(--lumiora-accent); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">We'd love to hear from you. Reach out and let's illuminate your future together.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card-lumiora p-4 text-center h-100">
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--lumiora-gold); font-size: 1.5rem;">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h4 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 0.5rem;">Email</h4>
+                    <p style="color: var(--lumiora-accent); margin: 0;">hello@lumiora.com</p>
+                    <p style="color: var(--lumiora-accent); margin: 0;">support@lumiora.com</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card-lumiora p-4 text-center h-100">
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--lumiora-gold); font-size: 1.5rem;">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h4 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 0.5rem;">Phone</h4>
+                    <p style="color: var(--lumiora-accent); margin: 0;">+1 234 567 890</p>
+                    <p style="color: var(--lumiora-accent); margin: 0;">+1 234 567 891</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card-lumiora p-4 text-center h-100">
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--lumiora-gold); font-size: 1.5rem;">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h4 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 0.5rem;">Address</h4>
+                    <p style="color: var(--lumiora-accent); margin: 0;">123 Education Lane</p>
+                    <p style="color: var(--lumiora-accent); margin: 0;">San Francisco, CA 94102</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5 justify-content-center">
+            <div class="col-lg-8">
+                <div class="form-lumiora">
+                    <h3 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 1.5rem; text-align: center;">Send us a Message</h3>
+                    <form method="POST" action="{{ url_for('contact') }}">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Your Name</label>
+                                <input type="text" name="name" class="form-control" required style="background: rgba(27, 12, 26, 0.6); border: 1px solid rgba(250, 220, 213, 0.2); color: var(--lumiora-light); border-radius: 10px; padding: 0.8rem 1rem;">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Your Email</label>
+                                <input type="email" name="email" class="form-control" required style="background: rgba(27, 12, 26, 0.6); border: 1px solid rgba(250, 220, 213, 0.2); color: var(--lumiora-light); border-radius: 10px; padding: 0.8rem 1rem;">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Subject</label>
+                            <input type="text" name="subject" class="form-control" required style="background: rgba(27, 12, 26, 0.6); border: 1px solid rgba(250, 220, 213, 0.2); color: var(--lumiora-light); border-radius: 10px; padding: 0.8rem 1rem;">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Message</label>
+                            <textarea name="message" rows="5" class="form-control" required style="background: rgba(27, 12, 26, 0.6); border: 1px solid rgba(250, 220, 213, 0.2); color: var(--lumiora-light); border-radius: 10px; padding: 0.8rem 1rem;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-lumiora w-100">
+                            <i class="fas fa-paper-plane me-2"></i>Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

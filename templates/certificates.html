@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}My Certificates - Lumiora{% endblock %}
+
+{% block content %}
+<section style="padding-top: 80px; background: linear-gradient(180deg, var(--lumiora-deep), var(--lumiora-dark)); min-height: 100vh;">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 col-md-4 dashboard-sidebar">
+                <div class="px-3 mb-4">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--lumiora-gold); font-size: 2rem; font-weight: 700;">
+                        {{ session.user_name[0] }}
+                    </div>
+                    <h5 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 0.3rem; text-align: center;">{{ session.user_name }}</h5>
+                    <span class="badge-lumiora d-block text-center">Student</span>
+                </div>
+                <nav>
+                    <a href="{{ url_for('dashboard') }}" class="sidebar-link">
+                        <i class="fas fa-tachometer-alt"></i>Dashboard
+                    </a>
+                    <a href="{{ url_for('progress') }}" class="sidebar-link">
+                        <i class="fas fa-chart-line"></i>Progress
+                    </a>
+                    <a href="{{ url_for('certificates') }}" class="sidebar-link active">
+                        <i class="fas fa-certificate"></i>Certificates
+                    </a>
+                    <a href="{{ url_for('profile') }}" class="sidebar-link">
+                        <i class="fas fa-user"></i>Profile
+                    </a>
+                    <a href="{{ url_for('logout') }}" class="sidebar-link">
+                        <i class="fas fa-sign-out-alt"></i>Logout
+                    </a>
+                </nav>
+            </div>
+
+            <div class="col-lg-9 col-md-8 py-4 px-4">
+                <h2 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 0.5rem;">My Certificates</h2>
+                <p style="color: var(--lumiora-accent); margin-bottom: 2rem;">Your achievements and completed courses</p>
+
+                {% if certificates %}
+                <div class="row g-4">
+                    {% for cert in certificates %}
+                    <div class="col-lg-6">
+                        <div class="certificate-card">
+                            <div class="certificate-seal">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <h3 class="certificate-title">Certificate of Completion</h3>
+                            <p style="color: var(--lumiora-accent); position: relative; z-index: 1;">This is to certify that</p>
+                            <h4 class="certificate-name">{{ cert.user_name }}</h4>
+                            <p style="color: var(--lumiora-accent); position: relative; z-index: 1;">has successfully completed</p>
+                            <h5 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; position: relative; z-index: 1;">{{ cert.course_name }}</h5>
+                            <div style="margin-top: 2rem; position: relative; z-index: 1;">
+                                <p style="color: var(--lumiora-accent); font-size: 0.85rem; margin: 0;">Date: {{ cert.date }}</p>
+                                <p style="color: var(--lumiora-mauve); font-size: 0.75rem; margin-top: 0.5rem; font-family: monospace;">{{ cert.id }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="card-lumiora p-5 text-center">
+                    <i class="fas fa-certificate" style="font-size: 3rem; color: var(--lumiora-mauve); margin-bottom: 1rem;"></i>
+                    <h4 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif;">No certificates yet</h4>
+                    <p style="color: var(--lumiora-accent);">Complete all lessons and quizzes in a course to earn your certificate</p>
+                    <a href="{{ url_for('browse_courses') }}" class="btn btn-lumiora mt-3">
+                        <i class="fas fa-compass me-2"></i>Browse Courses
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

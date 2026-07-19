@@ -1,0 +1,202 @@
+================================================================================
+                    LUMIORA - CMD / TERMINAL RUN GUIDE
+================================================================================
+
+This guide shows you how to run the Lumiora Online Learning Platform from
+Command Prompt (Windows) or Terminal (Mac/Linux).
+
+================================================================================
+STEP 1: OPEN CMD / TERMINAL
+================================================================================
+
+WINDOWS:
+  1. Press Win + R
+  2. Type "cmd" and press Enter
+  OR
+  1. Right-click on Start button
+  2. Click "Terminal" or "Command Prompt"
+
+MAC:
+  1. Press Cmd + Space
+  2. Type "Terminal" and press Enter
+
+LINUX:
+  1. Press Ctrl + Alt + T
+  OR
+  1. Search for "Terminal" in applications
+
+================================================================================
+STEP 2: NAVIGATE TO PROJECT FOLDER
+================================================================================
+
+Use the "cd" command to go to your project folder.
+
+EXAMPLE (Windows):
+  cd C:\Users\YourName\Downloads\lumiora
+
+EXAMPLE (Mac/Linux):
+  cd /home/yourname/Downloads/lumiora
+  cd ~/Downloads/lumiora
+
+TIP: You can drag and drop the folder into the terminal to get the path!
+
+================================================================================
+STEP 3: CREATE VIRTUAL ENVIRONMENT (Recommended)
+================================================================================
+
+A virtual environment keeps your project dependencies separate.
+
+WINDOWS:
+  python -m venv venv
+
+MAC/LINUX:
+  python3 -m venv venv
+
+You should see a new "venv" folder created in your project directory.
+
+================================================================================
+STEP 4: ACTIVATE VIRTUAL ENVIRONMENT
+================================================================================
+
+WINDOWS:
+  venv\Scripts\activate
+
+MAC/LINUX:
+  source venv/bin/activate
+
+You'll know it's activated when you see (venv) at the start of your prompt:
+  (venv) C:\Users\YourName\lumiora>
+
+================================================================================
+STEP 5: INSTALL DEPENDENCIES
+================================================================================
+
+With the virtual environment activated, run:
+
+  pip install -r requirements.txt
+
+You should see packages being downloaded and installed:
+  - Flask
+  - Werkzeug
+  - Jinja2
+  - MarkupSafe
+  - itsdangerous
+  - click
+
+================================================================================
+STEP 6: RUN THE APPLICATION
+================================================================================
+
+  python app.py
+
+OR (on some systems):
+
+  python3 app.py
+
+You should see output like:
+  * Serving Flask app 'app'
+  * Debug mode: on
+  * Running on http://127.0.0.1:5000
+
+================================================================================
+STEP 7: OPEN IN BROWSER
+================================================================================
+
+Open your web browser and go to:
+
+  http://127.0.0.1:5000
+  OR
+  http://localhost:5000
+
+================================================================================
+STEP 8: STOP THE SERVER
+================================================================================
+
+Press CTRL + C in the terminal window.
+
+================================================================================
+QUICK START (AUTOMATED)
+================================================================================
+
+WINDOWS - Double-click to run:
+  run.bat
+
+MAC/LINUX - Run in terminal:
+  chmod +x run.sh
+  ./run.sh
+
+These scripts will do Steps 3-6 automatically!
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+PROBLEM: "python" is not recognized
+SOLUTION: Use "python3" instead, or install Python from python.org
+
+PROBLEM: "pip is not recognized"
+SOLUTION: Try "python -m pip install -r requirements.txt"
+
+PROBLEM: Port 5000 is already in use
+SOLUTION: Change port in app.py: app.run(port=5001)
+
+PROBLEM: "Permission denied" on Mac/Linux
+SOLUTION: Use "chmod +x run.sh" before running
+
+PROBLEM: "No module named 'flask'"
+SOLUTION: Make sure virtual environment is activated (see Step 4)
+
+================================================================================
+DEFAULT LOGIN (After Registration)
+================================================================================
+
+Register a new account at: http://127.0.0.1:5000/register
+
+Or use these demo accounts (created after first registration):
+
+No pre-made accounts - you must register first!
+
+================================================================================
+DATA STORAGE (The "Instance DB")
+================================================================================
+
+Lumiora uses JSON files for data storage (NO DATABASE NEEDED!)
+
+When you first run the app, it auto-creates a "data" folder with:
+
+  data/
+  ├── users.json          - All registered users
+  ├── courses.json        - All available courses
+  ├── enrollments.json    - Who enrolled in what
+  ├── progress.json       - Lesson/quiz completion tracking
+  └── certificates.json   - Earned certificates
+
+This is your "instance database" - it's all stored in these JSON files!
+
+You can view/edit them with any text editor.
+
+================================================================================
+FILE LOCATIONS
+================================================================================
+
+Project Root:     Your download folder (e.g., C:\Users\You\lumiora)
+Data Folder:      <project_root>\data\
+Templates:        <project_root>\templates\
+Static Files:     <project_root>\static\
+Virtual Env:      <project_root>\venv\
+
+================================================================================
+COMMANDS SUMMARY
+================================================================================
+
+  cd <path>              - Change directory
+  dir  (Windows)         - List files
+  ls   (Mac/Linux)       - List files
+  python -m venv venv    - Create virtual environment
+  venv\Scripts\activate - Activate (Windows)
+  source venv/bin/activate - Activate (Mac/Linux)
+  pip install -r req...  - Install dependencies
+  python app.py          - Run the application
+  deactivate             - Exit virtual environment
+
+================================================================================

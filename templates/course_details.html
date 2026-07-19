@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+
+{% block title %}{{ course.title }} - Lumiora{% endblock %}
+
+{% block content %}
+<section style="padding-top: 100px; background: linear-gradient(180deg, var(--lumiora-deep), var(--lumiora-dark)); min-height: 100vh;">
+    <div class="container">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb" style="background: none; padding: 0;">
+                <li class="breadcrumb-item"><a href="{{ url_for('home') }}" style="color: var(--lumiora-accent); text-decoration: none;">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ url_for('browse_courses') }}" style="color: var(--lumiora-accent); text-decoration: none;">Courses</a></li>
+                <li class="breadcrumb-item active" style="color: var(--lumiora-light);">{{ course.title }}</li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <!-- Course Info -->
+            <div class="col-lg-8">
+                <div class="card-lumiora p-4 mb-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <span class="badge-lumiora">{{ course.level }}</span>
+                        <span class="badge-lumiora">{{ course.category }}</span>
+                        <span style="color: var(--lumiora-accent); font-size: 0.85rem;"><i class="fas fa-globe me-1"></i>{{ course.language }}</span>
+                    </div>
+
+                    <h1 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 1rem;">{{ course.title }}</h1>
+
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-star" style="color: var(--lumiora-gold);"></i>
+                            <span style="color: var(--lumiora-light); margin-left: 0.3rem; font-weight: 600;">{{ course.rating }}</span>
+                            <span style="color: var(--lumiora-accent); margin-left: 0.3rem;">({{ course.reviews//1000 }}k reviews)</span>
+                        </div>
+                        <span style="color: var(--lumiora-accent);">|</span>
+                        <span style="color: var(--lumiora-accent);"><i class="fas fa-user-tie me-1"></i>{{ course.instructor }}</span>
+                    </div>
+
+                    <div class="course-preview mb-4" style="aspect-ratio: 16/9; background: linear-gradient(135deg, var(--lumiora-dark), var(--lumiora-deep)); border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-direction: column; border: 1px solid rgba(250,220,213,0.1);">
+                        <i class="fas fa-play-circle" style="font-size: 4rem; color: var(--lumiora-gold); cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"></i>
+                        <p style="color: var(--lumiora-accent); margin-top: 1rem;">Preview this course</p>
+                    </div>
+
+                    <h4 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 1rem;">About this course</h4>
+                    <p style="color: var(--lumiora-accent); line-height: 1.8;">{{ course.description }}</p>
+
+                    <h4 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin: 2rem 0 1rem;">What you'll learn</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start gap-2 mb-2">
+                                <i class="fas fa-check-circle" style="color: var(--lumiora-gold); margin-top: 0.3rem;"></i>
+                                <span style="color: var(--lumiora-accent);">Master core concepts and fundamentals</span>
+                            </div>
+                            <div class="d-flex align-items-start gap-2 mb-2">
+                                <i class="fas fa-check-circle" style="color: var(--lumiora-gold); margin-top: 0.3rem;"></i>
+                                <span style="color: var(--lumiora-accent);">Build real-world projects</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start gap-2 mb-2">
+                                <i class="fas fa-check-circle" style="color: var(--lumiora-gold); margin-top: 0.3rem;"></i>
+                                <span style="color: var(--lumiora-accent);">Earn a recognized certificate</span>
+                            </div>
+                            <div class="d-flex align-items-start gap-2 mb-2">
+                                <i class="fas fa-check-circle" style="color: var(--lumiora-gold); margin-top: 0.3rem;"></i>
+                                <span style="color: var(--lumiora-accent);">Lifetime access to materials</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Content -->
+                <div class="card-lumiora p-4 mb-4">
+                    <h4 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 1.5rem;">Course Content</h4>
+
+                    <div class="accordion" id="courseAccordion">
+                        <!-- Lessons -->
+                        <div class="accordion-item" style="background: rgba(27, 12, 26, 0.6); border: 1px solid rgba(250,220,213,0.1); border-radius: 12px; margin-bottom: 0.5rem; overflow: hidden;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#lessonsCollapse" style="background: rgba(27, 12, 26, 0.8); color: var(--lumiora-light); border: none; box-shadow: none;">
+                                    <i class="fas fa-video me-2" style="color: var(--lumiora-gold);"></i>
+                                    Lessons ({{ course.lessons|length }})
+                                </button>
+                            </h2>
+                            <div id="lessonsCollapse" class="accordion-collapse collapse show">
+                                <div class="accordion-body" style="background: rgba(27, 12, 26, 0.4);">
+                                    {% for lesson in course.lessons %}
+                                    <div class="d-flex align-items-center justify-content-between p-3 mb-2" style="background: rgba(45, 34, 47, 0.5); border-radius: 10px; border: 1px solid rgba(250,220,213,0.05);">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div style="width: 35px; height: 35px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--lumiora-gold); font-size: 0.8rem; font-weight: 600;">{{ loop.index }}</div>
+                                            <div>
+                                                <p style="color: var(--lumiora-light); margin: 0; font-weight: 500;">{{ lesson.title }}</p>
+                                                <small style="color: var(--lumiora-accent);"><i class="far fa-clock me-1"></i>{{ lesson.duration }}</small>
+                                            </div>
+                                        </div>
+                                        {% if enrolled %}
+                                        <a href="{{ url_for('lesson', course_id=course.id, lesson_id=lesson.id) }}" class="btn btn-sm btn-lumiora">
+                                            <i class="fas fa-play me-1"></i>Start
+                                        </a>
+                                        {% else %}
+                                        <i class="fas fa-lock" style="color: var(--lumiora-accent);"></i>
+                                        {% endif %}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quizzes -->
+                        <div class="accordion-item" style="background: rgba(27, 12, 26, 0.6); border: 1px solid rgba(250,220,213,0.1); border-radius: 12px; overflow: hidden;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#quizzesCollapse" style="background: rgba(27, 12, 26, 0.8); color: var(--lumiora-light); border: none; box-shadow: none;">
+                                    <i class="fas fa-question-circle me-2" style="color: var(--lumiora-gold);"></i>
+                                    Quizzes & Assignments ({{ course.quizzes|length }})
+                                </button>
+                            </h2>
+                            <div id="quizzesCollapse" class="accordion-collapse collapse">
+                                <div class="accordion-body" style="background: rgba(27, 12, 26, 0.4);">
+                                    {% for quiz in course.quizzes %}
+                                    <div class="d-flex align-items-center justify-content-between p-3 mb-2" style="background: rgba(45, 34, 47, 0.5); border-radius: 10px; border: 1px solid rgba(250,220,213,0.05);">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div style="width: 35px; height: 35px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--lumiora-gold); font-size: 0.8rem; font-weight: 600;">Q{{ loop.index }}</div>
+                                            <div>
+                                                <p style="color: var(--lumiora-light); margin: 0; font-weight: 500;">{{ quiz.title }}</p>
+                                                <small style="color: var(--lumiora-accent);"><i class="fas fa-list-ol me-1"></i>{{ quiz.questions|length }} questions</small>
+                                            </div>
+                                        </div>
+                                        {% if enrolled %}
+                                        <a href="{{ url_for('quiz', course_id=course.id, quiz_id=quiz.id) }}" class="btn btn-sm btn-lumiora">
+                                            <i class="fas fa-pencil-alt me-1"></i>Take
+                                        </a>
+                                        {% else %}
+                                        <i class="fas fa-lock" style="color: var(--lumiora-accent);"></i>
+                                        {% endif %}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="card-lumiora p-4 sticky-top" style="top: 100px; z-index: 100;">
+                    <div class="text-center mb-4">
+                        {% if course.price_type == 'Free' %}
+                            <h2 style="color: var(--lumiora-gold); font-family: 'Playfair Display', serif; font-size: 2.5rem;">Free</h2>
+                        {% else %}
+                            <h2 style="color: var(--lumiora-gold); font-family: 'Playfair Display', serif; font-size: 2.5rem;">${{ course.price }}</h2>
+                        {% endif %}
+                    </div>
+
+                    {% if enrolled %}
+                        <div class="alert alert-lumiora alert-lumiora-success mb-3">
+                            <i class="fas fa-check-circle me-2"></i>You are enrolled in this course!
+                        </div>
+                        {% if progress %}
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span style="color: var(--lumiora-light); font-size: 0.9rem;">Progress</span>
+                                <span style="color: var(--lumiora-gold); font-weight: 600;">{{ progress.overall_progress }}%</span>
+                            </div>
+                            <div class="progress-lumiora">
+                                <div class="progress-bar" style="width: {{ progress.overall_progress }}%"></div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <a href="{{ url_for('lesson', course_id=course.id, lesson_id=1) }}" class="btn btn-lumiora w-100 mb-2">
+                            <i class="fas fa-play me-2"></i>Continue Learning
+                        </a>
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-lumiora w-100">
+                            <i class="fas fa-tachometer-alt me-2"></i>Go to Dashboard
+                        </a>
+                    {% else %}
+                        <form action="{{ url_for('enroll', course_id=course.id) }}" method="POST">
+                            <button type="submit" class="btn btn-lumiora w-100 mb-3">
+                                <i class="fas fa-sign-in-alt me-2"></i>Enroll Now
+                            </button>
+                        </form>
+                        <p style="color: var(--lumiora-accent); font-size: 0.85rem; text-align: center;">
+                            <i class="fas fa-infinity me-1"></i>Full lifetime access<br>
+                            <i class="fas fa-certificate me-1"></i>Certificate of completion<br>
+                            <i class="fas fa-mobile-alt me-1"></i>Access on mobile and TV
+                        </p>
+                    {% endif %}
+
+                    <hr style="border-color: rgba(250,220,213,0.1); margin: 1.5rem 0;">
+
+                    <div class="course-meta">
+                        <div class="d-flex align-items-center gap-3 mb-2">
+                            <i class="fas fa-signal" style="color: var(--lumiora-gold); width: 20px;"></i>
+                            <span style="color: var(--lumiora-accent);">{{ course.level }} Level</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-3 mb-2">
+                            <i class="fas fa-video" style="color: var(--lumiora-gold); width: 20px;"></i>
+                            <span style="color: var(--lumiora-accent);">{{ course.lessons|length }} lessons</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-3 mb-2">
+                            <i class="fas fa-question-circle" style="color: var(--lumiora-gold); width: 20px;"></i>
+                            <span style="color: var(--lumiora-accent);">{{ course.quizzes|length }} quizzes</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <i class="fas fa-globe" style="color: var(--lumiora-gold); width: 20px;"></i>
+                            <span style="color: var(--lumiora-accent);">{{ course.language }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

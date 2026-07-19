@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Quiz Results - Lumiora{% endblock %}
+
+{% block content %}
+<section style="padding-top: 100px; background: linear-gradient(180deg, var(--lumiora-deep), var(--lumiora-dark)); min-height: 100vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="text-center mb-5">
+                    <div style="width: 100px; height: 100px; background: {% if percentage >= 70 %}linear-gradient(135deg, var(--lumiora-gold), #B8956A){% else %}linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)){% endif %}; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                        <i class="fas {% if percentage >= 70 %}fa-trophy{% else %}fa-chart-bar{% endif %}" style="font-size: 2.5rem; color: {% if percentage >= 70 %}var(--lumiora-deep){% else %}var(--lumiora-light){% endif %};"></i>
+                    </div>
+                    <h2 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 0.5rem;">Quiz Results</h2>
+                    <p style="color: var(--lumiora-accent);">{{ quiz.title }}</p>
+                </div>
+
+                <div class="card-lumiora p-5 text-center mb-4">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div style="position: relative; width: 200px; height: 200px; margin: 0 auto 2rem;">
+                                <svg viewBox="0 0 100 100" style="transform: rotate(-90deg);">
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(250,220,213,0.1)" stroke-width="8"/>
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke="url(#gradient)" stroke-width="8" 
+                                            stroke-dasharray="283" stroke-dashoffset="{{ 283 - (283 * percentage / 100) }}" 
+                                            stroke-linecap="round" style="transition: stroke-dashoffset 1s ease;"/>
+                                    <defs>
+                                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" style="stop-color:var(--lumiora-mauve)"/>
+                                            <stop offset="100%" style="stop-color:var(--lumiora-gold)"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                                    <span style="font-size: 3rem; font-weight: 700; color: var(--lumiora-light); font-family: 'Playfair Display', serif;">{{ percentage }}%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 1rem;">
+                        {% if percentage >= 80 %}Excellent!{% elif percentage >= 60 %}Good Job!{% else %}Keep Practicing!{% endif %}
+                    </h3>
+                    <p style="color: var(--lumiora-accent); font-size: 1.1rem;">
+                        You scored <strong style="color: var(--lumiora-gold);">{{ score }}</strong> out of <strong style="color: var(--lumiora-light);">{{ total }}</strong> questions
+                    </p>
+
+                    {% if percentage >= 70 %}
+                    <div class="alert alert-lumiora alert-lumiora-success mt-4">
+                        <i class="fas fa-check-circle me-2"></i>Congratulations! You passed the quiz!
+                    </div>
+                    {% else %}
+                    <div class="alert alert-lumiora alert-lumiora-warning mt-4">
+                        <i class="fas fa-exclamation-triangle me-2"></i>You need 70% to pass. Try again!
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="{{ url_for('course_details', course_id=course.id) }}" class="btn btn-outline-lumiora">
+                        <i class="fas fa-book me-2"></i>Back to Course
+                    </a>
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-lumiora">
+                        <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

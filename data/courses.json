@@ -1,0 +1,366 @@
+{
+  "1": {
+    "id": "1",
+    "title": "Python Basics",
+    "instructor": "Dr. Sarah Mitchell",
+    "category": "Development",
+    "level": "Beginner",
+    "language": "English",
+    "rating": 4.8,
+    "reviews": 12500,
+    "price": 0,
+    "price_type": "Free",
+    "image": "python",
+    "description": "Master Python programming from scratch. Learn variables, data types, operators, control flow, and functions with hands-on projects.",
+    "lessons": [
+      {
+        "id": 1,
+        "title": "Introduction to Python",
+        "duration": "15 min",
+        "completed": false
+      },
+      {
+        "id": 2,
+        "title": "Variables and Data Types",
+        "duration": "20 min",
+        "completed": false
+      },
+      {
+        "id": 3,
+        "title": "Operators in Python",
+        "duration": "18 min",
+        "completed": false
+      },
+      {
+        "id": 4,
+        "title": "Control Flow - If/Else",
+        "duration": "25 min",
+        "completed": false
+      },
+      {
+        "id": 5,
+        "title": "Loops - For and While",
+        "duration": "22 min",
+        "completed": false
+      }
+    ],
+    "quizzes": [
+      {
+        "id": 1,
+        "title": "Python Fundamentals Quiz",
+        "questions": [
+          {
+            "q": "What is Python?",
+            "options": [
+              "A Snake",
+              "A Programming Language",
+              "A Database",
+              "An OS"
+            ],
+            "correct": 1
+          },
+          {
+            "q": "Which of these is a valid variable name?",
+            "options": [
+              "2name",
+              "_name",
+              "name-2",
+              "name 2"
+            ],
+            "correct": 1
+          },
+          {
+            "q": "What is the output of print(2**3)?",
+            "options": [
+              "6",
+              "8",
+              "9",
+              "16"
+            ],
+            "correct": 1
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Data Types Quiz",
+        "questions": [
+          {
+            "q": "What is the type of [1, 2, 3]?",
+            "options": [
+              "Tuple",
+              "List",
+              "Dictionary",
+              "Set"
+            ],
+            "correct": 1
+          },
+          {
+            "q": "Which function converts a string to integer?",
+            "options": [
+              "str()",
+              "int()",
+              "float()",
+              "bool()"
+            ],
+            "correct": 1
+          }
+        ]
+      }
+    ]
+  },
+  "2": {
+    "id": "2",
+    "title": "Web Development",
+    "instructor": "James Cooper",
+    "category": "Development",
+    "level": "Intermediate",
+    "language": "English",
+    "rating": 4.7,
+    "reviews": 8300,
+    "price": 49.99,
+    "price_type": "Paid",
+    "image": "web",
+    "description": "Build modern websites with HTML5, CSS3, JavaScript, and responsive design principles. Create real-world projects.",
+    "lessons": [
+      {
+        "id": 1,
+        "title": "HTML5 Fundamentals",
+        "duration": "20 min",
+        "completed": false
+      },
+      {
+        "id": 2,
+        "title": "CSS3 Styling",
+        "duration": "25 min",
+        "completed": false
+      },
+      {
+        "id": 3,
+        "title": "JavaScript Basics",
+        "duration": "30 min",
+        "completed": false
+      },
+      {
+        "id": 4,
+        "title": "Responsive Design",
+        "duration": "22 min",
+        "completed": false
+      }
+    ],
+    "quizzes": [
+      {
+        "id": 1,
+        "title": "Web Dev Basics",
+        "questions": [
+          {
+            "q": "What does HTML stand for?",
+            "options": [
+              "Hyper Text Markup Language",
+              "High Tech Modern Language",
+              "Hyper Transfer Mark Language",
+              "Home Tool Markup Language"
+            ],
+            "correct": 0
+          }
+        ]
+      }
+    ]
+  },
+  "3": {
+    "id": "3",
+    "title": "Data Science",
+    "instructor": "Dr. Emily Chen",
+    "category": "Data Science",
+    "level": "Advanced",
+    "language": "English",
+    "rating": 4.9,
+    "reviews": 15300,
+    "price": 59.99,
+    "price_type": "Paid",
+    "image": "data",
+    "description": "Dive into data analysis, visualization, machine learning algorithms, and statistical modeling with Python.",
+    "lessons": [
+      {
+        "id": 1,
+        "title": "Data Analysis with Pandas",
+        "duration": "30 min",
+        "completed": false
+      },
+      {
+        "id": 2,
+        "title": "Data Visualization",
+        "duration": "25 min",
+        "completed": false
+      },
+      {
+        "id": 3,
+        "title": "Machine Learning Basics",
+        "duration": "35 min",
+        "completed": false
+      }
+    ],
+    "quizzes": [
+      {
+        "id": 1,
+        "title": "Data Science Quiz",
+        "questions": [
+          {
+            "q": "Which library is used for data visualization?",
+            "options": [
+              "NumPy",
+              "Pandas",
+              "Matplotlib",
+              "Scikit-learn"
+            ],
+            "correct": 2
+          }
+        ]
+      }
+    ]
+  },
+  "4": {
+    "id": "4",
+    "title": "UI/UX Design",
+    "instructor": "Lisa Anderson",
+    "category": "Design",
+    "level": "Intermediate",
+    "language": "English",
+    "rating": 4.6,
+    "reviews": 7200,
+    "price": 39.99,
+    "price_type": "Paid",
+    "image": "design",
+    "description": "Learn user interface and user experience design principles, wireframing, prototyping, and design tools.",
+    "lessons": [
+      {
+        "id": 1,
+        "title": "Design Principles",
+        "duration": "20 min",
+        "completed": false
+      },
+      {
+        "id": 2,
+        "title": "Wireframing",
+        "duration": "25 min",
+        "completed": false
+      },
+      {
+        "id": 3,
+        "title": "Prototyping Tools",
+        "duration": "30 min",
+        "completed": false
+      }
+    ],
+    "quizzes": [
+      {
+        "id": 1,
+        "title": "UI/UX Quiz",
+        "questions": [
+          {
+            "q": "What does UX stand for?",
+            "options": [
+              "User Experience",
+              "User Extension",
+              "Universal Experience",
+              "User Expert"
+            ],
+            "correct": 0
+          }
+        ]
+      }
+    ]
+  },
+  "5": {
+    "id": "5",
+    "title": "Business Analytics",
+    "instructor": "Robert Taylor",
+    "category": "Business",
+    "level": "Beginner",
+    "language": "English",
+    "rating": 4.5,
+    "reviews": 5400,
+    "price": 29.99,
+    "price_type": "Paid",
+    "image": "business",
+    "description": "Learn business analysis, market research, financial modeling, and strategic decision making.",
+    "lessons": [
+      {
+        "id": 1,
+        "title": "Business Analysis Fundamentals",
+        "duration": "20 min",
+        "completed": false
+      },
+      {
+        "id": 2,
+        "title": "Market Research",
+        "duration": "25 min",
+        "completed": false
+      }
+    ],
+    "quizzes": [
+      {
+        "id": 1,
+        "title": "Business Quiz",
+        "questions": [
+          {
+            "q": "What is SWOT analysis?",
+            "options": [
+              "Strengths, Weaknesses, Opportunities, Threats",
+              "Sales, Workflow, Operations, Team",
+              "Strategy, Work, Output, Time",
+              "System, Web, Online, Technology"
+            ],
+            "correct": 0
+          }
+        ]
+      }
+    ]
+  },
+  "6": {
+    "id": "6",
+    "title": "Digital Marketing",
+    "instructor": "Amanda White",
+    "category": "Marketing",
+    "level": "Beginner",
+    "language": "English",
+    "rating": 4.7,
+    "reviews": 6800,
+    "price": 34.99,
+    "price_type": "Paid",
+    "image": "marketing",
+    "description": "Master SEO, social media marketing, content strategy, email marketing, and analytics.",
+    "lessons": [
+      {
+        "id": 1,
+        "title": "SEO Fundamentals",
+        "duration": "20 min",
+        "completed": false
+      },
+      {
+        "id": 2,
+        "title": "Social Media Strategy",
+        "duration": "25 min",
+        "completed": false
+      }
+    ],
+    "quizzes": [
+      {
+        "id": 1,
+        "title": "Marketing Quiz",
+        "questions": [
+          {
+            "q": "What does SEO stand for?",
+            "options": [
+              "Search Engine Optimization",
+              "Social Engagement Online",
+              "Sales Enhancement Operation",
+              "System Engine Output"
+            ],
+            "correct": 0
+          }
+        ]
+      }
+    ]
+  }
+}

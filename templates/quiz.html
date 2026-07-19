@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Quiz - {{ quiz.title }} - Lumiora{% endblock %}
+
+{% block content %}
+<section style="padding-top: 80px; background: linear-gradient(180deg, var(--lumiora-deep), var(--lumiora-dark)); min-height: 100vh;">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 col-md-4 dashboard-sidebar">
+                <div class="px-3 mb-4">
+                    <a href="{{ url_for('course_details', course_id=course.id) }}" style="color: var(--lumiora-accent); text-decoration: none; font-size: 0.9rem;">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Course
+                    </a>
+                    <h5 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-top: 1rem;">{{ course.title }}</h5>
+                </div>
+
+                <nav>
+                    <p style="color: var(--lumiora-accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; padding: 0 1.5rem; margin-bottom: 0.5rem;">Lessons</p>
+                    {% for l in course.lessons %}
+                    <a href="{{ url_for('lesson', course_id=course.id, lesson_id=l.id) }}" class="sidebar-link">
+                        <div style="width: 25px; height: 25px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--lumiora-light); font-size: 0.7rem; font-weight: 600;">{{ loop.index }}</div>
+                        <span style="font-size: 0.9rem;">{{ l.title }}</span>
+                    </a>
+                    {% endfor %}
+
+                    <p style="color: var(--lumiora-accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; padding: 0 1.5rem; margin: 1rem 0 0.5rem;">Quizzes</p>
+                    {% for q in course.quizzes %}
+                    <a href="{{ url_for('quiz', course_id=course.id, quiz_id=q.id) }}" class="sidebar-link {% if q.id == quiz.id %}active{% endif %}">
+                        <div style="width: 25px; height: 25px; background: {% if q.id in progress.completed_quizzes %}linear-gradient(135deg, var(--lumiora-gold), #B8956A){% else %}linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)){% endif %}; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: {% if q.id in progress.completed_quizzes %}var(--lumiora-deep){% else %}var(--lumiora-light){% endif %}; font-size: 0.7rem; font-weight: 600;">
+                            {% if q.id in progress.completed_quizzes %}<i class="fas fa-check"></i>{% else %}Q{% endif %}
+                        </div>
+                        <span style="font-size: 0.9rem;">{{ q.title }}</span>
+                    </a>
+                    {% endfor %}
+                </nav>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9 col-md-8 py-4 px-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <p style="color: var(--lumiora-accent); font-size: 0.85rem; margin: 0;">Quiz {{ quiz.id }} of {{ course.quizzes|length }}</p>
+                        <h2 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin: 0;">{{ quiz.title }}</h2>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="progress-lumiora" style="width: 150px;">
+                            <div class="progress-bar" style="width: {{ progress.overall_progress }}%"></div>
+                        </div>
+                        <span style="color: var(--lumiora-gold); font-weight: 600; font-size: 0.85rem;">{{ progress.overall_progress }}%</span>
+                    </div>
+                </div>
+
+                <form method="POST" action="{{ url_for('quiz', course_id=course.id, quiz_id=quiz.id) }}">
+                    {% for question in quiz.questions %}
+                    <div class="card-lumiora p-4 mb-4">
+                        <h5 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 1.5rem;">
+                            <span style="color: var(--lumiora-gold); margin-right: 0.5rem;">Q{{ loop.index }}.</span>{{ question.q }}
+                        </h5>
+
+                        {% for option in question.options %}
+                        <label class="quiz-option" onclick="selectOption(this)">
+                            <input type="radio" name="answer" value="{{ loop.index0 }}" required {% if loop.index0 == 0 %}checked{% endif %}>
+                            <span style="color: var(--lumiora-light);">{{ option }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('course_details', course_id=course.id) }}" class="btn btn-outline-lumiora">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Course
+                        </a>
+                        <button type="submit" class="btn btn-lumiora">
+                            <i class="fas fa-paper-plane me-2"></i>Submit Quiz
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+function selectOption(element) {
+    // Remove selected class from all options in the same card
+    const card = element.closest('.card-lumiora');
+    card.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.classList.remove('selected');
+    });
+    // Add selected class to clicked option
+    element.classList.add('selected');
+    // Check the radio input
+    element.querySelector('input[type="radio"]').checked = true;
+}
+</script>
+{% endblock %}

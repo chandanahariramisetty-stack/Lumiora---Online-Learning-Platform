@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile - Lumiora{% endblock %}
+
+{% block content %}
+<section style="padding-top: 80px; background: linear-gradient(180deg, var(--lumiora-deep), var(--lumiora-dark)); min-height: 100vh;">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 col-md-4 dashboard-sidebar">
+                <div class="px-3 mb-4">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--lumiora-gold); font-size: 2rem; font-weight: 700;">
+                        {{ user.full_name[0] }}
+                    </div>
+                    <h5 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 0.3rem; text-align: center;">{{ user.full_name }}</h5>
+                    <span class="badge-lumiora d-block text-center">{{ user.role }}</span>
+                </div>
+                <nav>
+                    <a href="{{ url_for('dashboard') }}" class="sidebar-link">
+                        <i class="fas fa-tachometer-alt"></i>Dashboard
+                    </a>
+                    <a href="{{ url_for('progress') }}" class="sidebar-link">
+                        <i class="fas fa-chart-line"></i>Progress
+                    </a>
+                    <a href="{{ url_for('certificates') }}" class="sidebar-link">
+                        <i class="fas fa-certificate"></i>Certificates
+                    </a>
+                    <a href="{{ url_for('profile') }}" class="sidebar-link active">
+                        <i class="fas fa-user"></i>Profile
+                    </a>
+                    <a href="{{ url_for('logout') }}" class="sidebar-link">
+                        <i class="fas fa-sign-out-alt"></i>Logout
+                    </a>
+                </nav>
+            </div>
+
+            <div class="col-lg-9 col-md-8 py-4 px-4">
+                <h2 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 0.5rem;">My Profile</h2>
+                <p style="color: var(--lumiora-accent); margin-bottom: 2rem;">Manage your account settings</p>
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="form-lumiora">
+                            <form method="POST" action="{{ url_for('profile') }}">
+                                <div class="mb-4">
+                                    <label class="form-label">Full Name</label>
+                                    <div class="position-relative">
+                                        <i class="fas fa-user position-absolute" style="left: 15px; top: 50%; transform: translateY(-50%); color: var(--lumiora-accent);"></i>
+                                        <input type="text" name="full_name" value="{{ user.full_name }}" class="form-control" required style="padding-left: 45px; background: rgba(27, 12, 26, 0.6); border: 1px solid rgba(250, 220, 213, 0.2); color: var(--lumiora-light); border-radius: 10px; padding: 0.8rem 1rem 0.8rem 45px;">
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label">Email Address</label>
+                                    <div class="position-relative">
+                                        <i class="fas fa-envelope position-absolute" style="left: 15px; top: 50%; transform: translateY(-50%); color: var(--lumiora-accent);"></i>
+                                        <input type="email" name="email" value="{{ user.email }}" class="form-control" required style="padding-left: 45px; background: rgba(27, 12, 26, 0.6); border: 1px solid rgba(250, 220, 213, 0.2); color: var(--lumiora-light); border-radius: 10px; padding: 0.8rem 1rem 0.8rem 45px;">
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label">Role</label>
+                                    <div class="position-relative">
+                                        <i class="fas fa-user-tag position-absolute" style="left: 15px; top: 50%; transform: translateY(-50%); color: var(--lumiora-accent);"></i>
+                                        <input type="text" value="{{ user.role }}" class="form-control" disabled style="padding-left: 45px; background: rgba(27, 12, 26, 0.4); border: 1px solid rgba(250, 220, 213, 0.1); color: var(--lumiora-accent); border-radius: 10px; padding: 0.8rem 1rem 0.8rem 45px;">
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label">New Password (leave blank to keep current)</label>
+                                    <div class="position-relative">
+                                        <i class="fas fa-lock position-absolute" style="left: 15px; top: 50%; transform: translateY(-50%); color: var(--lumiora-accent);"></i>
+                                        <input type="password" name="password" class="form-control" placeholder="Enter new password" style="padding-left: 45px; background: rgba(27, 12, 26, 0.6); border: 1px solid rgba(250, 220, 213, 0.2); color: var(--lumiora-light); border-radius: 10px; padding: 0.8rem 1rem 0.8rem 45px;">
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-lumiora">
+                                    <i class="fas fa-save me-2"></i>Save Changes
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card-lumiora p-4 text-center">
+                            <div style="width: 100px; height: 100px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--lumiora-gold); font-size: 2.5rem; font-weight: 700;">
+                                {{ user.full_name[0] }}
+                            </div>
+                            <h5 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 0.3rem;">{{ user.full_name }}</h5>
+                            <span class="badge-lumiora">{{ user.role }}</span>
+                            <p style="color: var(--lumiora-accent); font-size: 0.85rem; margin-top: 1rem;">
+                                <i class="far fa-calendar-alt me-1"></i>Member since {{ user.created_at[:10] }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

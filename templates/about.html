@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - Lumiora{% endblock %}
+
+{% block content %}
+<section style="padding-top: 100px; background: linear-gradient(180deg, var(--lumiora-deep), var(--lumiora-dark)); min-height: 100vh;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; box-shadow: 0 0 40px rgba(109, 60, 82, 0.4);">
+                <i class="fas fa-graduation-cap" style="font-size: 2.5rem; color: var(--lumiora-gold);"></i>
+            </div>
+            <h1 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 1rem;">About Lumiora</h1>
+            <p style="color: var(--lumiora-accent); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Illuminating futures through world-class online education</p>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-lg-4">
+                <div class="card-lumiora p-4 text-center h-100">
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--lumiora-gold); font-size: 1.5rem;">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h4 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 1rem;">Our Mission</h4>
+                    <p style="color: var(--lumiora-accent); line-height: 1.8;">To make quality education accessible to everyone, everywhere. We believe knowledge is the light that guides us toward a better future.</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card-lumiora p-4 text-center h-100">
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--lumiora-gold); font-size: 1.5rem;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 1rem;">Our Community</h4>
+                    <p style="color: var(--lumiora-accent); line-height: 1.8;">Join a vibrant community of learners and instructors from over 60 countries. Learn together, grow together, succeed together.</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card-lumiora p-4 text-center h-100">
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--lumiora-gold); font-size: 1.5rem;">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h4 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 1rem;">Our Quality</h4>
+                    <p style="color: var(--lumiora-accent); line-height: 1.8;">Every course is crafted by industry experts and rigorously reviewed. Earn recognized certificates that boost your career.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-lumiora p-5 mb-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h3 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 1.5rem;">Why Choose Lumiora?</h3>
+                    <div class="d-flex align-items-start gap-3 mb-3">
+                        <i class="fas fa-check-circle" style="color: var(--lumiora-gold); margin-top: 0.3rem; font-size: 1.2rem;"></i>
+                        <div>
+                            <h5 style="color: var(--lumiora-light); margin-bottom: 0.3rem;">Expert Instructors</h5>
+                            <p style="color: var(--lumiora-accent); margin: 0;">Learn from industry professionals with real-world experience</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3 mb-3">
+                        <i class="fas fa-check-circle" style="color: var(--lumiora-gold); margin-top: 0.3rem; font-size: 1.2rem;"></i>
+                        <div>
+                            <h5 style="color: var(--lumiora-light); margin-bottom: 0.3rem;">Flexible Learning</h5>
+                            <p style="color: var(--lumiora-accent); margin: 0;">Study at your own pace, anytime, anywhere</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3 mb-3">
+                        <i class="fas fa-check-circle" style="color: var(--lumiora-gold); margin-top: 0.3rem; font-size: 1.2rem;"></i>
+                        <div>
+                            <h5 style="color: var(--lumiora-light); margin-bottom: 0.3rem;">Practical Projects</h5>
+                            <p style="color: var(--lumiora-accent); margin: 0;">Build real-world projects to showcase your skills</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <i class="fas fa-check-circle" style="color: var(--lumiora-gold); margin-top: 0.3rem; font-size: 1.2rem;"></i>
+                        <div>
+                            <h5 style="color: var(--lumiora-light); margin-bottom: 0.3rem;">Recognized Certificates</h5>
+                            <p style="color: var(--lumiora-accent); margin: 0;">Earn certificates valued by employers worldwide</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <div style="width: 200px; height: 200px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; box-shadow: 0 0 60px rgba(109, 60, 82, 0.3);">
+                        <i class="fas fa-graduation-cap" style="font-size: 5rem; color: var(--lumiora-gold);"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

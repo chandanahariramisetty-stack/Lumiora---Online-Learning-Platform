@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Instructor Dashboard - Lumiora{% endblock %}
+
+{% block content %}
+<section style="padding-top: 80px; background: linear-gradient(180deg, var(--lumiora-deep), var(--lumiora-dark)); min-height: 100vh;">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 col-md-4 dashboard-sidebar">
+                <div class="px-3 mb-4">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--lumiora-gold); font-size: 2rem; font-weight: 700;">
+                        {{ session.user_name[0] }}
+                    </div>
+                    <h5 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 0.3rem; text-align: center;">{{ session.user_name }}</h5>
+                    <span class="badge-lumiora d-block text-center">Instructor</span>
+                </div>
+                <nav>
+                    <a href="{{ url_for('instructor_dashboard') }}" class="sidebar-link active">
+                        <i class="fas fa-chalkboard-teacher"></i>Dashboard
+                    </a>
+                    <a href="{{ url_for('dashboard') }}" class="sidebar-link">
+                        <i class="fas fa-tachometer-alt"></i>Student View
+                    </a>
+                    <a href="{{ url_for('profile') }}" class="sidebar-link">
+                        <i class="fas fa-user"></i>Profile
+                    </a>
+                    <a href="{{ url_for('logout') }}" class="sidebar-link">
+                        <i class="fas fa-sign-out-alt"></i>Logout
+                    </a>
+                </nav>
+            </div>
+
+            <div class="col-lg-9 col-md-8 py-4 px-4">
+                <h2 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 0.5rem;">Instructor Dashboard</h2>
+                <p style="color: var(--lumiora-accent); margin-bottom: 2rem;">Manage your courses and track student engagement</p>
+
+                <!-- Stats -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-4">
+                        <div class="card-lumiora p-4 text-center">
+                            <i class="fas fa-book" style="font-size: 2rem; color: var(--lumiora-gold); margin-bottom: 0.5rem;"></i>
+                            <h3 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 0.3rem;">{{ courses|length }}</h3>
+                            <p style="color: var(--lumiora-accent); margin: 0; font-size: 0.9rem;">My Courses</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card-lumiora p-4 text-center">
+                            <i class="fas fa-users" style="font-size: 2rem; color: var(--lumiora-gold); margin-bottom: 0.5rem;"></i>
+                            <h3 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 0.3rem;">{{ total_students }}</h3>
+                            <p style="color: var(--lumiora-accent); margin: 0; font-size: 0.9rem;">Total Students</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card-lumiora p-4 text-center">
+                            <i class="fas fa-star" style="font-size: 2rem; color: var(--lumiora-gold); margin-bottom: 0.5rem;"></i>
+                            <h3 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 0.3rem;">4.8</h3>
+                            <p style="color: var(--lumiora-accent); margin: 0; font-size: 0.9rem;">Avg. Rating</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Courses -->
+                <h4 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 1.5rem;">My Courses</h4>
+
+                {% if courses %}
+                <div class="row g-4">
+                    {% for course in courses %}
+                    <div class="col-lg-6">
+                        <div class="card-lumiora p-4">
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--lumiora-gold); font-size: 1.2rem;">
+                                    {% if course.image == 'python' %}<i class="fab fa-python"></i>
+                                    {% elif course.image == 'web' %}<i class="fas fa-globe"></i>
+                                    {% elif course.image == 'data' %}<i class="fas fa-database"></i>
+                                    {% elif course.image == 'design' %}<i class="fas fa-palette"></i>
+                                    {% else %}<i class="fas fa-laptop-code"></i>{% endif %}
+                                </div>
+                                <div>
+                                    <h5 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin: 0;">{{ course.title }}</h5>
+                                    <span class="badge-lumiora">{{ course.level }}</span>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span style="color: var(--lumiora-accent); font-size: 0.85rem;">
+                                    <i class="fas fa-video me-1"></i>{{ course.lessons|length }} lessons
+                                    <i class="fas fa-question-circle ms-2 me-1"></i>{{ course.quizzes|length }} quizzes
+                                </span>
+                                <span style="color: var(--lumiora-gold); font-weight: 600;">
+                                    {% if course.price_type == 'Free' %}Free{% else %}${{ course.price }}{% endif %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="card-lumiora p-5 text-center">
+                    <i class="fas fa-chalkboard" style="font-size: 3rem; color: var(--lumiora-mauve); margin-bottom: 1rem;"></i>
+                    <h4 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif;">No courses yet</h4>
+                    <p style="color: var(--lumiora-accent);">Create your first course to start teaching</p>
+                    <button class="btn btn-lumiora mt-3" onclick="alert('Course creation feature coming soon!')">
+                        <i class="fas fa-plus me-2"></i>Create Course
+                    </button>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

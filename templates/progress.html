@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}My Progress - Lumiora{% endblock %}
+
+{% block content %}
+<section style="padding-top: 80px; background: linear-gradient(180deg, var(--lumiora-deep), var(--lumiora-dark)); min-height: 100vh;">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 col-md-4 dashboard-sidebar">
+                <div class="px-3 mb-4">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--lumiora-gold); font-size: 2rem; font-weight: 700;">
+                        {{ session.user_name[0] }}
+                    </div>
+                    <h5 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 0.3rem; text-align: center;">{{ session.user_name }}</h5>
+                    <span class="badge-lumiora d-block text-center">Student</span>
+                </div>
+                <nav>
+                    <a href="{{ url_for('dashboard') }}" class="sidebar-link">
+                        <i class="fas fa-tachometer-alt"></i>Dashboard
+                    </a>
+                    <a href="{{ url_for('progress') }}" class="sidebar-link active">
+                        <i class="fas fa-chart-line"></i>Progress
+                    </a>
+                    <a href="{{ url_for('certificates') }}" class="sidebar-link">
+                        <i class="fas fa-certificate"></i>Certificates
+                    </a>
+                    <a href="{{ url_for('profile') }}" class="sidebar-link">
+                        <i class="fas fa-user"></i>Profile
+                    </a>
+                    <a href="{{ url_for('logout') }}" class="sidebar-link">
+                        <i class="fas fa-sign-out-alt"></i>Logout
+                    </a>
+                </nav>
+            </div>
+
+            <div class="col-lg-9 col-md-8 py-4 px-4">
+                <h2 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 0.5rem;">My Progress</h2>
+                <p style="color: var(--lumiora-accent); margin-bottom: 2rem;">Track your learning journey across all enrolled courses</p>
+
+                <!-- Overall Progress -->
+                <div class="card-lumiora p-4 mb-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-4 text-center">
+                            <div style="position: relative; width: 150px; height: 150px; margin: 0 auto;">
+                                <svg viewBox="0 0 100 100" style="transform: rotate(-90deg);">
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(250,220,213,0.1)" stroke-width="8"/>
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke="url(#grad)" stroke-width="8" 
+                                            stroke-dasharray="283" stroke-dashoffset="{{ 283 - (283 * avg_progress / 100) }}" 
+                                            stroke-linecap="round"/>
+                                    <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:var(--lumiora-mauve)"/><stop offset="100%" style="stop-color:var(--lumiora-gold)"/></linearGradient></defs>
+                                </svg>
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                                    <span style="font-size: 2rem; font-weight: 700; color: var(--lumiora-light); font-family: 'Playfair Display', serif;">{{ avg_progress }}%</span>
+                                </div>
+                            </div>
+                            <p style="color: var(--lumiora-accent); margin-top: 0.5rem;">Overall Progress</p>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <div class="text-center p-3" style="background: rgba(27, 12, 26, 0.4); border-radius: 12px;">
+                                        <h3 style="color: var(--lumiora-gold); font-family: 'Playfair Display', serif; margin: 0;">{{ courses|length }}</h3>
+                                        <p style="color: var(--lumiora-accent); margin: 0; font-size: 0.85rem;">Courses Enrolled</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="text-center p-3" style="background: rgba(27, 12, 26, 0.4); border-radius: 12px;">
+                                        <h3 style="color: var(--lumiora-gold); font-family: 'Playfair Display', serif; margin: 0;">
+                                            {% set total_lessons = 0 %}{% set completed_lessons = 0 %}
+                                            {% for c in courses %}{% set total_lessons = total_lessons + c.total_lessons %}{% set completed_lessons = completed_lessons + c.completed_lessons %}{% endfor %}
+                                            {{ completed_lessons }}/{{ total_lessons }}
+                                        </h3>
+                                        <p style="color: var(--lumiora-accent); margin: 0; font-size: 0.85rem;">Lessons Completed</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-center p-3" style="background: rgba(27, 12, 26, 0.4); border-radius: 12px;">
+                                        <h3 style="color: var(--lumiora-gold); font-family: 'Playfair Display', serif; margin: 0;">
+                                            {% set total_quizzes = 0 %}{% set completed_quizzes = 0 %}
+                                            {% for c in courses %}{% set total_quizzes = total_quizzes + c.total_quizzes %}{% set completed_quizzes = completed_quizzes + c.completed_quizzes %}{% endfor %}
+                                            {{ completed_quizzes }}/{{ total_quizzes }}
+                                        </h3>
+                                        <p style="color: var(--lumiora-accent); margin: 0; font-size: 0.85rem;">Quizzes Completed</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-center p-3" style="background: rgba(27, 12, 26, 0.4); border-radius: 12px;">
+                                        <h3 style="color: var(--lumiora-gold); font-family: 'Playfair Display', serif; margin: 0;">{{ courses|length }}</h3>
+                                        <p style="color: var(--lumiora-accent); margin: 0; font-size: 0.85rem;">Certificates</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Progress -->
+                <h4 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin-bottom: 1.5rem;">Course Progress</h4>
+
+                {% if courses %}
+                {% for course in courses %}
+                <div class="card-lumiora p-4 mb-3">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center gap-3">
+                                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--lumiora-mauve), var(--lumiora-plum)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--lumiora-gold); font-size: 1.2rem;">
+                                    {% if course.image == 'python' %}<i class="fab fa-python"></i>
+                                    {% elif course.image == 'web' %}<i class="fas fa-globe"></i>
+                                    {% elif course.image == 'data' %}<i class="fas fa-database"></i>
+                                    {% elif course.image == 'design' %}<i class="fas fa-palette"></i>
+                                    {% else %}<i class="fas fa-laptop-code"></i>{% endif %}
+                                </div>
+                                <div>
+                                    <h5 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif; margin: 0;">{{ course.title }}</h5>
+                                    <small style="color: var(--lumiora-accent);">{{ course.completed_lessons }}/{{ course.total_lessons }} lessons, {{ course.completed_quizzes }}/{{ course.total_quizzes }} quizzes</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="progress-lumiora flex-grow-1">
+                                    <div class="progress-bar" style="width: {{ course.progress }}%"></div>
+                                </div>
+                                <span style="color: var(--lumiora-gold); font-weight: 600; font-size: 0.85rem; min-width: 40px;">{{ course.progress }}%</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-md-end mt-3 mt-md-0">
+                            <a href="{{ url_for('lesson', course_id=course.id, lesson_id=1) }}" class="btn btn-sm btn-lumiora">
+                                <i class="fas fa-play me-1"></i>Continue
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="card-lumiora p-5 text-center">
+                    <i class="fas fa-chart-line" style="font-size: 3rem; color: var(--lumiora-mauve); margin-bottom: 1rem;"></i>
+                    <h4 style="color: var(--lumiora-light); font-family: 'Playfair Display', serif;">No courses enrolled</h4>
+                    <p style="color: var(--lumiora-accent);">Enroll in a course to start tracking your progress</p>
+                    <a href="{{ url_for('browse_courses') }}" class="btn btn-lumiora mt-3">
+                        <i class="fas fa-compass me-2"></i>Browse Courses
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
